@@ -1,4 +1,3 @@
-
 fun main() {
     val puzzleInput = TxtFileReader.getTextContentOf("01.txt")
     val measurements = puzzleInput.split("\n").map {
@@ -12,18 +11,18 @@ fun main() {
 
 }
 
-fun partTwo(measurements: IntArray) {
-    var windowsOfThree = IntArray(measurements.size-2)
-    for (i in 2 until measurements.size){
-        windowsOfThree.set(i-2,measurements[i]+measurements[i-1]+measurements[i-2])
+private fun partTwo(measurements: IntArray) {
+    var windowsOfThree = IntArray(measurements.size - 2)
+    for (i in 2 until measurements.size) {
+        windowsOfThree.set(i - 2, measurements[i] + measurements[i - 1] + measurements[i - 2])
     }
     partOne(windowsOfThree)
 }
 
-fun partOne(measurements: IntArray){
-    var increasedMeasurementCounter =0;
-    for(i in 1 until measurements.size){
-        if(measurements[i-1] < measurements[i])
+private fun partOne(measurements: IntArray) {
+    var increasedMeasurementCounter = 0
+    for (i in 1 until measurements.size) {
+        if (measurements[i - 1] < measurements[i])
             increasedMeasurementCounter++
     }
 
