@@ -1,6 +1,6 @@
+private val list = TxtFileReader.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
 fun main() {
     val puzzleInput = TxtFileReader.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
-
     val magicNumbers = parseNumbersFrom(puzzleInput[0])
     val boards = parseBoardsFrom(
         puzzleInput.subList(fromIndex = 1, toIndex = puzzleInput.size - 1), magicNumbers
