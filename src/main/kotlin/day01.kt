@@ -1,5 +1,5 @@
 fun main() {
-    val puzzleInput = TxtFileReader.getTextContentOf("01.txt")
+    val puzzleInput = Utils.getTextContentOf("01.txt")
     val measurements = puzzleInput.split("\n").map {
         it.trim().toInt()
     }.toIntArray()

@@ -1,14 +1,12 @@
 fun main() {
-    val puzzleInput = TxtFileReader.getTextContentOf("03.txt")
+    val puzzleInput = Utils.getTextContentOf("03.txt")
     val lines = puzzleInput.split(System.lineSeparator())
 
     fun partOne() {
         val gammaRate: String = calculateGamaRate(lines)
         val epsilonRate: String = gammaRate.replace('0', 'z').replace('1', '0').replace('z', '1')
-        println("\n\n          Part one")
-        println("   ----------------------")
-        println("Power consumption is " + gammaRate.toInt(2) * epsilonRate.toInt(2))
-        println("   ----------------------")
+
+        Utils.printPartOneAnswer("Power consumption is ", gammaRate.toInt(2) * epsilonRate.toInt(2))
     }
 
     fun partTwo(){
@@ -16,10 +14,7 @@ fun main() {
         val oxygenRating =ratingCalculator.calculateOxygenRating()
         val co2Rating = ratingCalculator.calculateCo2Rating()
 
-        println("\n\n          Part two")
-        println("   ----------------------")
-        println(" life support rating is " + oxygenRating * co2Rating)
-        println("   ----------------------")
+        Utils.printPartTwoAnswer("life support rating is ", oxygenRating * co2Rating)
     }
 
     partOne()

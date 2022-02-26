@@ -1,5 +1,5 @@
 fun main(){
-    val puzzleInput = TxtFileReader.getTextContentOf("02.txt")
+    val puzzleInput = Utils.getTextContentOf("02.txt")
     val commands: List<Command> = puzzleInput.split("\n").map {
             Command(it.split(" ")[0], it.split(" ")[1].trim().toInt())
     }
@@ -18,10 +18,7 @@ fun main(){
             }
         }
         val lastLocation = locationHistory.last()
-        println("\n\n              Part one")
-        println("     --------------------------")
-        print("depth * horizontal position = ${lastLocation.depth * lastLocation.horizontalPosition}")
-        println("\n     --------------------------")
+        Utils.printPartOneAnswer("depth X horizontal position = ", lastLocation.depth * lastLocation.horizontalPosition)
     }
     fun partTwo(){
     initialLocation = Location()
@@ -29,7 +26,6 @@ fun main(){
     var aim = 0
         for(command in commands){
             val lastLocation = locationHistory.last()
-            //println("current location: $lastLocation")
             when{
                 "forward" in command.direction ->
                     locationHistory.add(Location(lastLocation.depth + (command.vlaue * aim), lastLocation.horizontalPosition + command.vlaue))
@@ -38,10 +34,7 @@ fun main(){
             }
         }
         val lastLocation = locationHistory.last()
-        println("\n\n              Part two")
-        println("     --------------------------")
-        print("depth * horizontal position = ${lastLocation.depth * lastLocation.horizontalPosition}")
-        println("\n     --------------------------")
+        Utils.printPartTwoAnswer("depth * horizontal position = ", lastLocation.depth * lastLocation.horizontalPosition )
 
     }
 

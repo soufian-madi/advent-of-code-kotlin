@@ -1,6 +1,6 @@
-private val list = TxtFileReader.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
+private val list = Utils.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
 fun main() {
-    val puzzleInput = TxtFileReader.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
+    val puzzleInput = Utils.getTextContentOf("04.txt").split(System.lineSeparator() + System.lineSeparator())
     val magicNumbers = parseNumbersFrom(puzzleInput[0])
     val boards = parseBoardsFrom(
         puzzleInput.subList(fromIndex = 1, toIndex = puzzleInput.size - 1), magicNumbers
@@ -15,7 +15,7 @@ private fun partOne(magicNumbers: List<Number>, boards: List<BingoBoard>) {
         magicNumber.marked = true
         for (board in boards) {
             if (board.hasWon()) {
-                printWinningBoard(board, magicNumber)
+                Utils.printPartOneAnswer("Winner: Score ", board.getScore(magicNumber))
                 return
             }
         }
@@ -30,7 +30,7 @@ private fun partTwo(magicNumbers: List<Number>, boards: List<BingoBoard>) {
         val lastNotWinningBoard = notWinningBoards.last()
         notWinningBoards = notWinningBoards.filter { !it.hasWon() }.toList()
         if (notWinningBoards.isEmpty()) {
-            printLoosingBoard(lastNotWinningBoard, magicNumber)
+            Utils.printPartTwoAnswer("Last Board Standing: Score ", lastNotWinningBoard.getScore(magicNumber))
             return
         }
     }
@@ -46,21 +46,6 @@ fun parseBoardsFrom(boardDefinitions: List<String>, magicNumbers: List<Number>):
         })
     }.toList()
 }
-
-fun printWinningBoard(board: BingoBoard, lastNumber: Number) {
-    println("\n\n              Part one")
-    println("   --------------------------")
-    println("     Winner: Score ${board.getScore(lastNumber)}")
-    println("   --------------------------")
-}
-
-fun printLoosingBoard(board: BingoBoard, lastNumber: Number) {
-    println("\n\n              Part two")
-    println("   --------------------------")
-    println("Last Board Standing: Score ${board.getScore(lastNumber)}")
-    println("   --------------------------")
-}
-
 fun parseNumbersFrom(numbersString: String): List<Number> {
     return numbersString.split(',').map { Number(it.toInt()) }.toList()
 }
