@@ -1,37 +1,52 @@
 import kotlin.math.abs
+    private val puzzleInput:String = Utils.getTextContentOf("07.txt")
+    private val numbers: List<Int> = parseNumbers(puzzleInput)
 
-fun main(){
-    val puzzleInput:String = Utils.getTextContentOf("07.txt")
-    val numbers: List<Int> = parseNumbers(puzzleInput)
-    fun partOne(){
-    fun calculateDistanceSum(position : Int): Int{
+private fun main(){
+    fun calculateFuelConsumption(position : Int): Int{
         var sum = 0
-        numbers.forEach { sum+= abs(it-position)}
+        numbers.forEach { sum = sum.plus(abs(it-position)) }
+        return sum
+    }
+    fun calculateNonLinearFuelConsumption(position: Int): Int {
+        var sum = 0
+        numbers.forEach { sum += (abs(it - position) * (abs(it - position) + 1)) / 2 }
         return sum
     }
 
-
+    fun partOne(){
     var shortestDistance:Int = Int.MAX_VALUE
-    var result : Int = -1;
-
     for (i in numbers.first()..numbers.last() ) {
-        val currentDistanceSum= calculateDistanceSum(i)
+        val currentDistanceSum= calculateFuelConsumption(i)
         if (currentDistanceSum < shortestDistance){
             shortestDistance = currentDistanceSum
-            result = i
         }
     }
     Utils.printPartOneAnswer("Optimal location is ", shortestDistance)
     }
 
+    fun partTwo(){
+
+        var shortestDistance:Int = Int.MAX_VALUE
+
+        for (i in numbers.first()..numbers.last() ) {
+            val currentDistanceSum= calculateNonLinearFuelConsumption(i)
+            if (currentDistanceSum < shortestDistance){
+                shortestDistance = currentDistanceSum
+            }
+        }
+        Utils.printPartTwoAnswer("Optimal location is ", shortestDistance)
+    }
+
     partOne()
+    partTwo()
 }
 
 
 
 fun parseNumbers(numbersWithKomata: String): List<Int> {
-    var strings : List<String> = numbersWithKomata.split(",")
-    var result : List<Int> =strings.map { it.toInt()}
+    val strings : List<String> = numbersWithKomata.split(",")
+    val result : List<Int> =strings.map { it.toInt()}
     return result.sorted();
 }
 
